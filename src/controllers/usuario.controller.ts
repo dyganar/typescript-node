@@ -24,7 +24,10 @@ class UsuarioController {
         const senhaValida = await usuario.compararSenhas(senha)
         if(!senhaValida) return res.status(400).send({message: 'Senha incorreta!'})
 
-        return res.json(usuario)
+        return res.json({
+            usuario,
+            token: usuario.gerarToken()
+         })
     }
 
     public get(req: Request, res: Response): Response {
