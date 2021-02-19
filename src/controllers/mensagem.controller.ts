@@ -9,7 +9,7 @@ class MensagemController {
             {
                 texto: req.body.texto,
                 remetente: req.usuario._id,
-                destinatario: req.params.id
+                destinatario: req.usuarioChat._id
             }
         )
 

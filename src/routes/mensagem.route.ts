@@ -6,6 +6,7 @@ const mensagemRoute = Router()
 
 mensagemRoute.post(
     '/:id', 
+    authMiddleware.autorizarUsuarioByParams,
     authMiddleware.autorizarUsuarioByToken, 
     mensagemController.enviar
 )
