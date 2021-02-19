@@ -8,6 +8,11 @@ class UsuarioController {
         return res.json(usuario)
 
     }
+
+    public get(req: Request, res: Response): Response {
+        return res.json({'mensage':'Ok'})
+
+    }
 }
 
 export default new UsuarioController()

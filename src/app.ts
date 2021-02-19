@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import usuarioRoute from './routes/usuario.route';
 
 export class App {
     private express: express.Application
@@ -8,9 +9,10 @@ export class App {
 
     constructor() {
         this.express = express()
-        this.listen()
         this.middlewares()
         this.database()
+        this.routes()
+        this.listen()
     }
 
     public getApp(): express.Application {
@@ -34,5 +36,9 @@ export class App {
             useUnifiedTopology: true,
             useNewUrlParser: true
         })
+    }
+
+    private routes(): void {
+        this.express.use('/usuarios', usuarioRoute)
     }
 }
