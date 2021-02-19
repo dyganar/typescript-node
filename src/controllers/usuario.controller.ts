@@ -5,7 +5,13 @@ class UsuarioController {
 
     public async cadastrar(req: Request, res: Response): Promise<Response>{
         const usuario = await usuarioModel.create(req.body)
-        return res.json(usuario)
+        const resposta = {
+            message: 'Usuário cadastrado com sucesso!',
+            _id: usuario._id,
+            nome: usuario.nome,
+            avatar: usuario.avatar
+        }
+        return res.json(resposta)
 
     }
 
