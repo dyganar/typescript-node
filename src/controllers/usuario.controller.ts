@@ -30,8 +30,9 @@ class UsuarioController {
          })
     }
 
-    public get(req: Request, res: Response): Response {
-        return res.json({'mensage':'Ok'})
+    public async get(req: Request, res: Response): Promise<Response> {
+        const usuarios = await usuarioModel.find({})
+        return res.json({ message: usuarios })
 
     }
 }

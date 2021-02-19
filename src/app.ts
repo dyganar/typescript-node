@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import usuarioRoute from './routes/usuario.route';
+import mensagemRoute from './routes/mensagem.route';
 
 export class App {
     private express: express.Application
@@ -31,7 +32,7 @@ export class App {
     }
 
     private database(): void {
-        mongoose.connect("mongodb+srv://dyganar:tkdy9826@cluster0.rod1s.mongodb.net/api-node?retryWrites=true&w=majority",
+        mongoose.connect(process.env.connectionString,
         {
             useUnifiedTopology: true,
             useNewUrlParser: true
@@ -40,5 +41,6 @@ export class App {
 
     private routes(): void {
         this.express.use('/usuarios', usuarioRoute)
+        this.express.use('/mensagens', mensagemRoute)
     }
 }

@@ -47,7 +47,7 @@ UsuarioSchema.methods.gerarToken = function(): string {
         avatar: USER.avatar
     }
 
-    return jwt.sign(decodedToken, "S3gr3d0p4rAt0ken", { expiresIn: '1d'})
+    return jwt.sign(decodedToken, process.env.JWT_KEY , { expiresIn: '5h'})
 }
 
 
