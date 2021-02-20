@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import mensagemModel from '../models/mensagem.model'
 import usuarioModel from '../models/usuario.model'
 
 class UsuarioController {
@@ -45,7 +46,22 @@ class UsuarioController {
 
         const usuarios = await usuarioModel.find({ _id: { $ne: idUsuarioLogado }})
 
-        return res.json(usuarios)
+        const usuariosMensagem = await Promise.all(usuarios.map(usuario => {
+            return mensagemModel.buscaChat(idUsuarioLogado, usuario._id)
+                .sort('-createdAt')
+                .limit(1)
+                .map(mensagens => {
+                    return {
+                        _id: usuario._id,
+                        nome: usuario.nome,
+                        avatar: usuario.avatar,
+                        ultimaMensagem: mensagens[0] ? mensagens[0].texto : null,
+                        dataUltimaMensagem: mensagens[0] ? mensagens[0].createdAt : null
+                    }
+                })
+        }))
+
+        return res.json(usuariosMensagem)
     }
 }
 

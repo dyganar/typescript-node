@@ -9,7 +9,7 @@ usuarioRoute.post(
     usuarioController.cadastrar
 )
 usuarioRoute.post('/login', usuarioController.autenticar)
-usuarioRoute.get('/', usuarioController.get)
+//usuarioRoute.get('/', usuarioController.get)
 usuarioRoute.get(
     '/:id', 
     authMiddleware.autorizarUsuarioByParams,
