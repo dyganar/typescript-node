@@ -61,7 +61,14 @@ class UsuarioController {
                 })
         }))
 
-        return res.json(usuariosMensagem)
+        const mensagensOrdenadas = usuariosMensagem
+        .sort((a, b) => (a.dataUltimaMensagem ? 0 : 1) - (b.dataUltimaMensagem ? 0 : 1) ||
+                        -(a.dataUltimaMensagem > b.dataUltimaMensagem) ||
+                        +(a.dataUltimaMensagem < b.dataUltimaMensagem)
+        )
+
+
+        return res.json(mensagensOrdenadas)
     }
 }
 
