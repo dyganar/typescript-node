@@ -39,6 +39,14 @@ class UsuarioController {
     public getById(req: Request, res: Response): Response {
         return res.json(req.usuarioChat)
     }
+
+    public async listar(req: Request, res: Response): Promise<Response> {
+        const idUsuarioLogado = req.usuario._id
+
+        const usuarios = await usuarioModel.find({ _id: { $ne: idUsuarioLogado }})
+
+        return res.json(usuarios)
+    }
 }
 
 export default new UsuarioController()
