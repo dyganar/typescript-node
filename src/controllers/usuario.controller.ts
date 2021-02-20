@@ -35,6 +35,10 @@ class UsuarioController {
         return res.json({ message: usuarios })
 
     }
+
+    public getById(req: Request, res: Response): Response {
+        return res.json(req.usuarioChat)
+    }
 }
 
 export default new UsuarioController()
