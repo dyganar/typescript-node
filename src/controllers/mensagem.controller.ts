@@ -29,7 +29,16 @@ class MensagemController {
                 ]
             })
             .sort('createdAt')
-        return res.json(mensagens)
+
+            const mensagensChat = mensagens.map(mensagem => {
+                return {
+                    texto: mensagem.texto,
+                    createdAt: mensagem.createdAt,
+                    isRemetente: mensagem.remetente == String(idUsuarioLogado)
+                }
+            })
+
+        return res.json(mensagensChat)
     }
 
 }
